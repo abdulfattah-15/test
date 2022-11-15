@@ -3,6 +3,7 @@ import os
 import requests
 from sys import stderr
 from flask import Flask, request, jsonify
+from requests.auth import HTTPBasicAuth
 
 app = Flask(__name__)
 
