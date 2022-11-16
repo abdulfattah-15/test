@@ -26,5 +26,21 @@ def hosts():
     response = requests.get(url, auth = HTTPBasicAuth(username, password))
     return response.json()
 
+@app.get("/hive/summary")
+def hive():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    a = x['items'][6]
+    b = x['items'][7]
+    c = x['items'][8]
+
+    d=dict()
+    d['items'] = a,b,c
+    return d
+
 if __name__ == "__main__":
     app.run(debug=True)
