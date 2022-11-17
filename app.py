@@ -42,5 +42,169 @@ def hive():
     d['items'] = a,b,c
     return d
 
+@app.get("/mapreduce2")
+def mapReduce():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    a = x['items'][8]
+    b = x['items'][15]
+    d=dict()
+    d['items'] = a,b
+
+    return d
+
+@app.get("/hbase/summary")
+def hbase():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    a = x['items'][6]
+
+    return a
+
+@app.get("/hbase/metrics")
+def hbaseMetrics():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HBASE/components/HBASE_REGIONSERVER?fields=metrics/hbase/regionserver/Server/Get_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/ScanNext_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Append_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Delete_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Increment_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Mutate_num_ops._rate[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Get_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/regionserver/Server/ScanNext_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Mutate_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Increment_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Append_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/regionserver/Server/Delete_95th_percentile._max[1668672332,1668675932,15],metrics/hbase/ipc/IPC/numOpenConnections._sum[1668672332,1668675932,15],metrics/hbase/ipc/IPC/numActiveHandler._sum[1668672332,1668675932,15],metrics/hbase/ipc/IPC/numCallsInGeneralQueue._sum[1668672332,1668675932,15],metrics/hbase/regionserver/Server/updatesBlockedTime._rate[1668672332,1668675932,15],metrics/cpu/cpu_system._sum[1668672332,1668675932,15],metrics/cpu/cpu_user._sum[1668672332,1668675932,15],metrics/cpu/cpu_nice._sum[1668672332,1668675932,15],metrics/cpu/cpu_idle._sum[1668672332,1668675932,15],metrics/cpu/cpu_wio._sum[1668672332,1668675932,15],metrics/network/pkts_in._avg[1668672332,1668675932,15],metrics/network/pkts_out._avg[1668672332,1668675932,15],metrics/disk/read_bps._sum[1668672332,1668675932,15],metrics/disk/write_bps._sum[1668672332,1668675932,15]&format=null_padding&_=1668672315058'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x 
+
+
+
+@app.get("/yarn/summary")
+def yarn():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][0]
+    a = x['items'][20]
+    b = x['items'][27]
+    c = x['items'][29]
+    d=dict()
+    d['items'] = e,a,b,c
+
+    return d 
+
+
+@app.get("/yarn/metrics")
+def yarnMetrics():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/YARN/components/NODEMANAGER?fields=metrics/yarn/ContainersFailed._rate[1668673339,1668676939,15],metrics/yarn/ContainersCompleted._rate[1668673339,1668676939,15],metrics/yarn/ContainersLaunched._rate[1668673339,1668676939,15],metrics/yarn/ContainersIniting._sum[1668673339,1668676939,15],metrics/yarn/ContainersKilled._rate[1668673339,1668676939,15],metrics/yarn/ContainersRunning._sum[1668673339,1668676939,15],metrics/memory/mem_total._avg[1668673339,1668676939,15],metrics/memory/mem_free._avg[1668673339,1668676939,15],metrics/disk/read_bps._sum[1668673339,1668676939,15],metrics/disk/write_bps._sum[1668673339,1668676939,15],metrics/network/pkts_in._avg[1668673339,1668676939,15],metrics/network/pkts_out._avg[1668673339,1668676939,15],metrics/cpu/cpu_system._sum[1668673339,1668676939,15],metrics/cpu/cpu_user._sum[1668673339,1668676939,15],metrics/cpu/cpu_nice._sum[1668673339,1668676939,15],metrics/cpu/cpu_idle._sum[1668673339,1668676939,15],metrics/cpu/cpu_wio._sum[1668673339,1668676939,15]&format=null_padding&_=1668672315144'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password)) 
+
+    return response.json()   
+
+@app.get("/zookeeper/summary")
+def zookeeper():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][32]
+
+    return e
+
+@app.get("/zeppelin/summary")
+def zeppelin():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][30]
+
+    return e
+
+@app.get("/spark2/summary")
+def spark2():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][23]
+
+    return e
+
+@app.get("/ambari/summary")
+def ambari():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][16]
+    a = x['items'][17]
+    d=dict()
+    d['items'] = e,a
+    return d
+
+@app.get("/ambari/metrics")
+def ambariMetrics():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/AMBARI_METRICS/components/METRICS_COLLECTOR?fields=metrics/hbase/master/AverageLoad[1668675124,1668678724,15],metrics/hbase/regionserver/storefiles[1668675124,1668678724,15],metrics/hbase/regionserver/regions[1668675124,1668678724,15],metrics/hbase/regionserver/requests._rate[1668675124,1668678724,15],metrics/hbase/regionserver/blockCacheHitPercent[1668675124,1668678724,15],metrics/hbase/regionserver/compactionQueueSize[1668675124,1668678724,15]&_=1668672315308'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+    
+    return response.json()
+
+@app.get("/infrasolr/summary")
+def infraSolr():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][13]
+    return e
+
+@app.get("/superset/summary")
+def superset():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][25]
+    return e
+
+@app.get("/druid/summary")
+def druid():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    e = x['items'][1]
+    a = x['items'][2]
+    b = x['items'][3]
+    c = x['items'][4]
+    d=dict()
+    d['items'] = e,a,b,c
+
+    return d 
+
 if __name__ == "__main__":
     app.run(debug=True)
