@@ -34,9 +34,9 @@ def hive():
     response = requests.get(url, auth = HTTPBasicAuth(username, password))
 
     x = response.json()
-    a = x['items'][6]
-    b = x['items'][7]
-    c = x['items'][8]
+    a = x['items'][10]
+    b = x['items'][11]
+    c = x['items'][12]
 
     d=dict()
     d['items'] = a,b,c
