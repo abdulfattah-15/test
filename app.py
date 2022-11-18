@@ -206,5 +206,16 @@ def druid():
 
     return d 
 
+@app.post("/hdfs/rename")
+def hdfsRename():
+    url = 'http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/fileops/rename'
+    username = "sapujagad"
+    password = "kayangan"
+    data = request.get_json()
+    response = requests.post(url,json = data, auth = HTTPBasicAuth(username, password))
+   
+
+    return response.json()
+
 if __name__ == "__main__":
     app.run(debug=True)
