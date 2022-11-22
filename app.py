@@ -34,14 +34,16 @@ def hive():
     response = requests.get(url, auth = HTTPBasicAuth(username, password))
 
     x = response.json()
-    a = x['items'][10]
-    b = x['items'][11]
-    c = x['items'][12]
-
-    d=dict()
-    d['items'] = a,b,c
+    d = dict()
+    b = 0
+    d['items'] = {}
+    for i in range(len(x["items"])):
+        if x["items"][i]["ServiceComponentInfo"]["service_name"] == "HIVE":
+            a = x["items"][i]
+            d['items'][b] = a
+            b += 1
+    
     return d
-
 @app.get("/mapreduce2")
 def mapReduce():
     url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
