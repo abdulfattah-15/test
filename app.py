@@ -26,6 +26,36 @@ def hosts():
     response = requests.get(url, auth = HTTPBasicAuth(username, password))
     return response.json()
 
+@app.get("/host/memory")
+def hostMem():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/hosts?fields=metrics/memory/mem_total,metrics/memory/mem_free,metrics/memory/mem_cached&_=1669173311623'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/host/cpu")
+def hostCPU():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/hosts?fields=metrics/cpu/cpu_wio&_=1669173311686'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/host/disk")
+def hostDisk():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/hosts?fields=metrics/disk/disk_free,metrics/disk/disk_total&_=1669173311729'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
 @app.get("/hive/summary")
 def hive():
     url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/components/?ServiceComponentInfo/component_name=APP_TIMELINE_SERVER%7CServiceComponentInfo/category.in(MASTER,CLIENT)&fields=ServiceComponentInfo/service_name,host_components/HostRoles/display_name&minimal_response=true&_=1667968440999'
