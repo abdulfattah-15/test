@@ -249,5 +249,85 @@ def hdfsRename():
 
     return response.json()
 
+@app.get("/hdfs/bytesw")
+def hdfsBytesWrite():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/dfs/datanode/bytes_written&format=null_padding&_=1669268400225'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/gctime")
+def hdfsGCTime():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/jvm/gcTimeMillis&format=null_padding&_=1669268400267'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/memuse")
+def hdfsMemUsed():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/jvm/memHeapUsedM&format=null_padding&_=1669268400291'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/memcommit")
+def hdfsMemCommit():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/jvm/memHeapCommittedM&format=null_padding&_=1669268400306'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/processdisk")
+def hdfsProcessDisk():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/dfs/datanode/bytes_read,host_components/metrics/dfs/datanode/bytes_written,host_components/metrics/dfs/datanode/TotalReadTime,host_components/metrics/dfs/datanode/TotalWriteTime&format=null_padding&_=1669268400419'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/processnet")
+def hdfsProcessNet():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/dfs/datanode/RemoteBytesRead,host_components/metrics/dfs/datanode/reads_from_remote_client,host_components/metrics/dfs/datanode/RemoteBytesWritten,host_components/metrics/dfs/datanode/writes_from_remote_client&format=null_padding&_=1669268400463'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/spaceutil")
+def hdfsSpaceUtil():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/FSDatasetState/org/apache/hadoop/hdfs/server/datanode/fsdataset/impl/FsDatasetImpl/Remaining,host_components/metrics/dfs/datanode/Capacity&format=null_padding&_=1669268400383'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
+@app.get("/hdfs/bytesr")
+def hdfsBytesRead():
+    url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/dfs/datanode/bytes_read&format=null_padding&_=1669268400355'
+    username = "sapujagad"
+    password = "kayangan"
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+
+    x = response.json()
+    return x
+
 if __name__ == "__main__":
     app.run(debug=True)
