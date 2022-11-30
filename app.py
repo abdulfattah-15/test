@@ -249,6 +249,21 @@ def hdfsRename():
 
     return response.json()
 
+@app.get("/hdfs/download/<path:path>")
+def hdfsDownload(path):
+    username = "sapujagad"
+    password = "kayangan"
+    
+    url = 'http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/download/browse?path=/' + path + '&download=true'
+    
+    response = requests.get(url, auth = HTTPBasicAuth(username, password))
+    x = path 
+    
+    last = x.rsplit('/', 1)[-1]
+    
+    
+    return send_file(io.BytesIO(response.content), attachment_filename=last, as_attachment=True)
+
 @app.get("/hdfs/bytesw")
 def hdfsBytesWrite():
     url = 'http://10.10.65.1:8080/api/v1/clusters/sapujagad/services/HDFS/components/DATANODE?fields=host_components/metrics/dfs/datanode/bytes_written&format=null_padding&_=1669268400225'
