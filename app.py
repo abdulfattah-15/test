@@ -250,20 +250,44 @@ def hdfsRename():
 
     return response.json()
 
+def urlDownload(path):
+    extensions = ['.png','jpg','jpeg','pdf', '.doc','.docx', '.xls','xlsx','.csv', '.tsv']
+    if all(ext not in path for ext in extensions):
+        username = "sapujagad"
+        password = "kayangan"
+        url = 'http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/download/zip/generate-link'
+        #data = request.get_json()
+        data = {"download":True,
+                "entries":["/"+ path]}
+        response= requests.post(url, json=data, auth = HTTPBasicAuth(username, password))
+        x = response.json()
+        url1='http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/download/zip?requestId='
+        url1 += x['requestId']
+        response1 = requests.get(url1, auth = HTTPBasicAuth(username, password))
+
+        x = path 
+        last = x.rsplit('/', 1)[-1]+".zip"
+
+        z = response1.content
+        memory_file = last
+        with open(memory_file, 'wb') as zf:
+            zf.write(z)
+        
+        return send_file(memory_file, attachment_filename=last, as_attachment=True)
+    else:   
+        username = "sapujagad"
+        password = "kayangan" 
+        url = 'http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/download/browse?path=/' + path + '&download=true'
+        response = requests.get(url, auth = HTTPBasicAuth(username, password))
+        x = path 
+        last = x.rsplit('/', 1)[-1]
+        return send_file(io.BytesIO(response.content), attachment_filename=last, as_attachment=True)
+    
 @app.get("/hdfs/download/<path:path>")
 def hdfsDownload(path):
-    username = "sapujagad"
-    password = "kayangan"
-    
-    url = 'http://10.10.65.1:8080/api/v1/views/FILES/versions/1.0.0/instances/hdfs_viewer/resources/files/download/browse?path=/' + path + '&download=true'
-    
-    response = requests.get(url, auth = HTTPBasicAuth(username, password))
-    x = path 
-    
-    last = x.rsplit('/', 1)[-1]
-    
-    
-    return send_file(io.BytesIO(response.content), attachment_filename=last, as_attachment=True)
+    zf = urlDownload(path)
+    return zf
+
 
 @app.get("/hdfs/bytesw")
 def hdfsBytesWrite():
