@@ -463,5 +463,19 @@ def namenodeHeap():
 
     return d
 
+@app.get("/pythonPackage")
+def pythonPackage():
+    client = SSHClient()
+    client.set_missing_host_key_policy(AutoAddPolicy())
+
+    client.connect('10.207.26.22', username="apps", password="apps247")
+    stdin, stdout, stderr = client.exec_command('python3 -m pip list --format json\n')
+    time.sleep(2)
+    x = json.load(stdout)
+    d = dict()
+    d["items"]= {}
+    d["items"] = x
+    return  d
+
 if __name__ == "__main__":
     app.run(debug=True)
