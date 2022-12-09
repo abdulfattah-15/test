@@ -5,7 +5,7 @@ import io
 from sys import stderr
 from flask import Flask, request, jsonify, send_file
 from requests.auth import HTTPBasicAuth
-#from paramiko import SSHClient, AutoAddPolicy
+from paramiko import SSHClient, AutoAddPolicy
 
 app = Flask(__name__)
 
